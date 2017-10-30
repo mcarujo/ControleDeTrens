@@ -3,8 +3,6 @@
 
 #include "BlackGPIO/BlackGPIO.h"
 #include <stdint.h>
-#include <thread>
-#include <mutex> 
 
 class Display                   
 {
@@ -18,13 +16,13 @@ class Display
             
         ~Display();
             
-        void showNumber(uint16_t _number);
+        void turnOn(uint8_t seg);
+        void turnOff(uint8_t seg);
 
     private:     
     
         /* Current number */
         uint16_t number;
-        std::mutex mtx; 
     
         /* digits */
         BlackLib::BlackGPIO *digit1;
@@ -41,9 +39,7 @@ class Display
         BlackLib::BlackGPIO *segF;
         BlackLib::BlackGPIO *segG;
         BlackLib::BlackGPIO *segDP;
-        
-        void turnOnSegments(uint8_t number);
-        void worker();
+
 };
 
 #endif // DISPLAY_H_
